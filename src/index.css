@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-surface: #F4F8F1;
+  --color-green-primary: #4EA845;
+  --color-green-deep: #357A2C;
+  --color-green-ink: #2E6B29;
+  --color-green-mint: #EAF6E7;
+  --color-green-mint-fill: #B7E0A0;
+  --color-text-dark: #1F2B1C;
+  --color-text-body: #5B6B58;
+  --color-text-muted: #8A908A;
+  --color-amber: #D99A2B;
+  --color-cream: #FFF3DA;
+  --color-tan: #C8935B;
+  --color-card: #FFFFFF;
+  --color-card-border: #E4EAE1;
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F4F8F1;
+  color: #1F2B1C;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hide scrollbar while keeping functionality */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #B7E0A0;
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+.font-display {
+  font-family: 'Sora', sans-serif;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}

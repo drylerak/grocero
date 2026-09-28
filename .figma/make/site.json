@@ -1,0 +1,12 @@
+{
+  "title": "Grocero Case Study | Theonymfi Dryleraki",
+  "description": "Eine Product-Management-Case-Study über die Entwicklung von Grocero, einem personalisierten Einkaufsassistenten für den wöchentlichen Lebensmitteleinkauf.",
+  "language": "de",
+  "robots": {
+    "index": true
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
