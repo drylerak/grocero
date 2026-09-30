@@ -650,7 +650,7 @@ export default function App() {
             <p className="text-[10px] font-semibold tracking-widest uppercase text-[#4EA845] font-body mb-3">DAS PRODUKT</p>
             <h3 className="font-display font-bold text-[#1F2B1C] text-2xl md:text-3xl leading-tight mb-5">Grocero ist ein dynamischer, personalisierter Einkaufsassistent.</h3>
             <p className="font-body text-[#5B6B58] text-base leading-relaxed w-full">
-              Über ein persönliches Profil erfasst Grocero Haushaltsgröße, Ernährungsweise, Bedarfe und Vorlieben und erstellt daraus wöchentlich einen Warenkorb mit den benötigten Produkten in passenden Mengen. Grocero erinnert bedarfsgerecht an Nachschub und kann Rezepte scannen und direkt in einen Warenkorb mit passenden Produkten und Mengen umwandeln. Der Nutzer kann den automatisch erstellten Warenkorb bearbeiten oder ergänzen und ihn anschließend an unseren Kanalpartner REWE übergeben, der Checkout, Bezahlung und Lieferung übernimmt. Nach jeder Bestellung speichert Grocero bestätigte Produktauswahlen und lernt aus Korrekturen, bevorzugten Marken, regelmäßig gekauften Artikeln und Einkaufsrhythmen. Dadurch werden spätere Warenkörbe genauer und benötigen kaum Anpassungen. Nutzer sparen Zeit und mentale Energie und müssen sich nicht um die Planung, Produktsuche und Organisation des Wocheneinkaufs kümmern.
+              Im Produktkonzept erfasst Grocero über ein persönliches Profil Haushaltsgröße, Ernährungsweise, Bedarfe und Vorlieben und erstellt daraus wöchentlich einen Warenkorb mit den benötigten Produkten in passenden Mengen. Grocero soll bedarfsgerecht an Nachschub erinnern und Rezepte direkt in einen Warenkorb mit passenden Produkten und Mengen umwandeln. Der Nutzer kann den automatisch erstellten Warenkorb bearbeiten oder ergänzen. Der fertige Warenkorb soll anschließend an den vorgesehenen Kanalpartner REWE übergeben werden; der technische Weg dafür ist noch offen. REWE würde Checkout, Bezahlung und Lieferung übernehmen. Grocero soll bestätigte Produktauswahlen und Korrekturen für spätere Warenkörbe nutzen. Ob dadurch weniger Anpassungen nötig werden, wird im geplanten Vier-Wochen-Test geprüft. Das Ziel ist, Zeit und mentale Energie bei der Planung, Produktsuche und Organisation des Wocheneinkaufs zu sparen.
             </p>
           </div>
 
@@ -679,8 +679,8 @@ export default function App() {
                 { title: 'Ersten Warenkorb erstellen', text: 'Auf Basis des Profils wählt Grocero benötigte Produkte aus, berechnet passende Mengen für den Haushalt und erstellt den ersten Warenkorb, der auf der Landingpage zur Bearbeitung angezeigt wird. Dafür ist keine Bestellhistorie notwendig.' },
                 { title: 'Weiteren Bedarf aufnehmen', text: 'Der Nutzer kann eigene Rezepte scannen. Grocero ordnet den Rezeptzutaten passende Produkte und Mengen zu. Mit einem Klick fügt der Nutzer sie dem Warenkorb hinzu. Weitere Artikel lassen sich schnell per Chat und später auch per Barcode ergänzen.' },
                 { title: 'Warenkorb prüfen', text: 'Der Nutzer öffnet die Warenkorbansicht, prüft den Warenkorb, passt Produktmengen an und entfernt oder ergänzt Artikel nach Bedarf.' },
-                { title: 'Verfügbarkeit und Ersatz klären', text: 'Grocero zeigt nicht verfügbare Produkte und mehrere mögliche Ersatzartikel an, aus denen der Nutzer vor der Bestellung auswählen kann.' },
-                { title: 'An REWE übergeben', text: 'Der fertige Warenkorb soll über eine geplante API-Integration an REWE übergeben werden. REWE übernimmt Checkout, Bezahlung und Lieferung.' },
+                { title: 'Verfügbarkeit und Ersatz klären', text: 'Grocero soll nicht verfügbare Produkte und mehrere mögliche Ersatzartikel anzeigen. Dafür ist ein verlässlicher Zugriff auf aktuelle REWE-Produktdaten erforderlich.' },
+                { title: 'An REWE übergeben', text: 'Der fertige Warenkorb soll an REWE übergeben werden. Der technische Weg für die vollständige Warenkorbübergabe ist noch offen; REWE würde Checkout, Bezahlung und Lieferung übernehmen.' },
               ].map((step, i) => (
                 <li key={step.title} className="relative flex gap-5 pb-7 last:pb-0">
                   <div className="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-[#4EA845] flex items-center justify-center">
@@ -701,20 +701,62 @@ export default function App() {
               <p className="text-[10px] font-semibold tracking-widest uppercase text-[#D99A2B] font-body">ZENTRALE PRODUKTHYPOTHESEN</p>
               <span className="bg-[#FFF3DA] border border-[#D99A2B] rounded-full px-3 py-1 text-[10px] font-semibold text-[#D99A2B] font-body">OFFEN · NICHT VALIDIERT</span>
             </div>
-            <div className="grid md:grid-cols-3 gap-5">
+            <div className="grid md:grid-cols-3 gap-5 items-stretch">
               {[
-                { n: '01', label: 'NUTZEN', text: 'Ein vorbereiteter Warenkorb reduziert Zeit- und Planungsaufwand sowie Entscheidungsmüdigkeit.' },
-                { n: '02', label: 'TREFFERQUALITÄT', text: 'Das persönliche Profil reicht für einen relevanten ersten Warenkorb, der nur wenige Korrekturen benötigt.' },
-                { n: '03', label: 'ZAHLUNGSBEREITSCHAFT', text: 'Haushalte sind bereit, für einen Einkaufsassistenten zu zahlen, der ihnen Zeit und Planungsaufwand abnimmt.' },
+                {
+                  n: '01',
+                  label: 'NUTZEN',
+                  text: 'Ein vorbereiteter Warenkorb reduziert Zeit- und Planungsaufwand sowie Entscheidungsmüdigkeit.',
+                  test: 'Zeitvergleich zwischen Grocero und dem Bestellprozess in der REWE-App.',
+                  criteria: 'Ca. 5 statt mind. 20 Minuten bis zur Übergabe.',
+                },
+                {
+                  n: '02',
+                  label: 'TREFFERQUALITÄT',
+                  text: 'Das persönliche Profil reicht für einen relevanten ersten Warenkorb, der mit jeder Nutzung genauer wird.',
+                  test: 'Test mit 20 Haushalten: Die Teilnehmenden beantworten die sechs Onboarding-Fragen und prüfen den daraus erstellten Warenkorb gegen ihren tatsächlichen Wochenbedarf. Ihre Korrekturen fließen in die Folgekörbe ein; in Woche 4 wird derselbe Vergleich wiederholt.',
+                  criteria: '> 70 % Warenkorbakzeptanz (Anteil der unverändert übernommenen Artikel); ≤ 4 Korrekturen im ersten Korb und ≤ 2 Korrekturen pro Warenkorb bis Woche 4.',
+                },
+                {
+                  n: '03',
+                  label: 'ZAHLUNGSBEREITSCHAFT',
+                  text: 'Haushalte sind bereit, für Premium-Funktionen zu zahlen, die den Planungsaufwand weiter reduzieren.',
+                  test: 'Fake-Door-Test mit einem Premium-Angebot, bevor die kostenpflichtigen Funktionen entwickelt werden.',
+                  criteria: 'Conversion-Rate über 8 %.',
+                },
               ].map((hypothesis) => (
-                <div key={hypothesis.n} className="bg-white border border-[#E4EAE1] rounded-2xl p-5">
+                <div key={hypothesis.n} className="bg-white border border-[#E4EAE1] rounded-2xl p-5 flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="font-display font-bold text-xl text-[#D99A2B]">{hypothesis.n}</span>
                     <p className="font-body text-[10px] font-semibold tracking-widest text-[#D99A2B]">{hypothesis.label}</p>
                   </div>
-                  <p className="font-body text-[#1F2B1C] text-sm leading-relaxed">{hypothesis.text}</p>
+                  <p className="font-body text-[#1F2B1C] text-sm leading-relaxed mb-6 md:min-h-[7.5rem]">{hypothesis.text}</p>
+                  <div className="border-t border-[#E4EAE1] pt-5 flex flex-col gap-5">
+                    <div>
+                      <p className="font-body text-[10px] font-semibold tracking-widest text-[#357A2C] mb-1.5">TEST</p>
+                      <p className="font-body text-[#5B6B58] text-xs leading-relaxed">{hypothesis.test}</p>
+                    </div>
+                    <div>
+                      <p className="font-body text-[10px] font-semibold tracking-widest text-[#357A2C] mb-1.5">ERFOLGSKRITERIEN</p>
+                      <p className="font-body text-[#5B6B58] text-xs leading-relaxed">{hypothesis.criteria}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-6 bg-[#EAF6E7] border border-[#B7E0A0] rounded-2xl p-6">
+              <h4 className="font-display font-bold text-[#357A2C] text-lg mb-4">Kritische Abhängigkeiten</h4>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-white/60 border border-[#B7E0A0] rounded-xl p-4">
+                  <p className="font-body text-[10px] font-semibold tracking-widest text-[#357A2C] mb-2">TECHNISCHE MACHBARKEIT</p>
+                  <p className="font-body text-[#1F2B1C] text-sm leading-relaxed">Kann ein vollständiger Warenkorb zuverlässig an REWE übergeben werden?</p>
+                </div>
+                <div className="bg-white/60 border border-[#B7E0A0] rounded-xl p-4">
+                  <p className="font-body text-[10px] font-semibold tracking-widest text-[#357A2C] mb-2">PRODUKTDATEN</p>
+                  <p className="font-body text-[#1F2B1C] text-sm leading-relaxed">Hat Grocero Zugriff auf regelmäßig aktualisierte REWE-Produktdaten, Preise und Verfügbarkeiten, damit Warenkorb und Ersatzoptionen verlässlich bleiben?</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -726,7 +768,7 @@ export default function App() {
                 <ol className="flex flex-col gap-5">
                   <li className="flex gap-3">
                     <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[#4EA845] text-white font-display font-bold text-xs flex items-center justify-center">1</span>
-                    <p className="font-body text-[#357A2C] text-sm leading-relaxed"><span className="font-semibold">Kostenlose Version:</span> Automatischer Warenkorb aus dem Haushaltsprofil. Spätere Bestellungen verfeinern Produktauswahl und Erinnerungen.</p>
+                    <p className="font-body text-[#357A2C] text-sm leading-relaxed"><span className="font-semibold">Kostenlose Version:</span> Automatischer Warenkorb aus dem Haushaltsprofil. Spätere Bestellungen sollen Produktauswahl und Erinnerungen verfeinern.</p>
                   </li>
                   <li className="flex gap-3">
                     <span className="flex-shrink-0 w-7 h-7 rounded-full bg-[#4EA845] text-white font-display font-bold text-xs flex items-center justify-center">2</span>
@@ -736,7 +778,7 @@ export default function App() {
               </div>
               <div className="bg-[#EAF6E7] border border-[#B7E0A0] rounded-2xl p-6">
                 <p className="text-[10px] font-semibold tracking-widest uppercase text-[#4EA845] font-body mb-4">EINNAHMEN</p>
-                <p className="font-body text-[#357A2C] text-sm leading-relaxed">Kundenabonnements bilden die Haupteinnahmequelle. Als zusätzliche Einnahmequelle ist eine CPA-Provision für an REWE vermittelte Neukunden vorgesehen. REWE ist Kanalpartner und übernimmt Sortiment, Checkout und Lieferung.</p>
+                <p className="font-body text-[#357A2C] text-sm leading-relaxed">Kundenabonnements bilden die geplante Haupteinnahmequelle. Als zusätzliche Einnahmequelle ist eine CPA-Provision für an REWE vermittelte Neukunden vorgesehen. REWE ist als Kanalpartner vorgesehen und würde Sortiment, Checkout und Lieferung übernehmen.</p>
               </div>
             </div>
           </div>
@@ -807,6 +849,9 @@ export default function App() {
               <figcaption className="font-body text-[#5B6B58] text-xs text-center mt-4">
                 Vom Onboarding bis zur Übergabe des Warenkorbs an REWE
               </figcaption>
+              <p className="font-body text-[#8A908A] text-[10px] text-center italic mt-2">
+                Konzept-Prototyp · Produktdaten sind simuliert · nicht mit Nutzern validiert
+              </p>
             </figure>
           </div>
         </section>
@@ -824,21 +869,21 @@ export default function App() {
               {
                 col: 'NOW', color: 'bg-[#4EA845]',
                 items: [
-                  { title: 'Automatischen Warenkorb anhand von sechs Onboarding-Fragen erstellen', metric: 'Warenkorbakzeptanzrate nach Abschluss des Onboardings > 70 %' },
-                  { title: 'Warenkorb durch den Nutzer bearbeiten', metric: 'Ziel: weniger als 4 Korrekturen pro Warenkorb' },
-                  { title: 'Wöchentliche Nutzung etablieren', metric: 'Rückkehrquote in Woche 2 > 50 %; die Bearbeitungsrate sinkt wöchentlich' },
-                  'API-Integration mit REWE und Produktdatenbasis aufbauen',
+                  { title: 'Automatischen Warenkorb anhand von sechs Onboarding-Fragen erstellen', metric: '> 70 % der vorgeschlagenen Artikel werden unverändert übernommen' },
+                  { title: 'Warenkorb durch den Nutzer bearbeiten', metric: 'Ziel: ≤ 4 Korrekturen im ersten Warenkorb' },
+                  { title: 'Wöchentliche Nutzung etablieren', metric: 'Rückkehrquote in Woche 2 > 50 %' },
+                  'Technischen Weg für die Warenkorbübergabe an REWE und den Zugriff auf Produktdaten klären',
                   'Datenschutzeinwilligung und Profildaten absichern',
                 ],
               },
               {
                 col: 'NEXT', color: 'bg-[#4EA845]',
                 items: [
-                  { title: 'Personalisierung des Wochenkorbs verbessern', metric: 'Bearbeitungsrate bis Woche 4 um ≥ 30 % senken; weniger als 2 Korrekturen pro Warenkorb' },
+                  { title: 'Personalisierung des Wochenkorbs verbessern', metric: '≤ 2 Korrekturen pro Warenkorb bis Woche 4' },
                   { title: 'Produktverfügbarkeit und Ersatzartikel absichern', metric: 'Mindestens 2 Ersatzoptionen; Akzeptanzrate der Ersatzartikel > 60 %' },
-                  { title: 'Zahlungsbereitschaft per Fake-Door-Test prüfen', metric: 'Conversion-Rate > 8 %; über CPA bestätigte REWE-Neukunden' },
+                  { title: 'Zahlungsbereitschaft per Fake-Door-Test prüfen', metric: 'Conversion-Rate > 8 %' },
                   'Bedarfsprognose anhand wiederholt gekaufter Artikel verbessern',
-                  { title: 'Zeitersparnis gegenüber Supermarkt-Apps messen', metric: 'Etwa 5 statt mindestens 20 Minuten; Ergänzungen in unter 3 Minuten' },
+                  { title: 'Zeitersparnis gegenüber Supermarkt-Apps messen', metric: 'Ca. 5 statt mind. 20 Minuten bis zur Übergabe' },
                 ],
               },
               {
